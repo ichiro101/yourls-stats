@@ -41,6 +41,9 @@
 $route['default_controller'] = "home";
 $route['404_override'] = '';
 
+$route['all'] = 'link_stats/all';
+$route['link_stats/(:any)'] = 'link_stats/link_stats';
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

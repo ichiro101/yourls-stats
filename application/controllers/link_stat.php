@@ -9,7 +9,7 @@ class Link_Stat extends CI_Controller {
 
 	// Show only the statistics for a given link (or
 	// shorturl)
-	public function link_stat() {
+	public function link_stat($url) {
 
 	}
 }
