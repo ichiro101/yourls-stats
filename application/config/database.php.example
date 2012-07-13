@@ -48,6 +48,7 @@
 $active_group = 'default';
 $active_record = TRUE;
 
+// The database information to the YOURLS database!
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'root';
 $db['default']['password'] = '';
