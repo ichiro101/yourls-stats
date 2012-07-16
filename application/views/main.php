@@ -12,6 +12,14 @@
 			<div class="navbar">
 			<div class="navbar-inner">
 				<a class="brand" href="<?php echo site_url('/'); ?>">Yourls Stats</a>
+				<ul class="nav">
+					<li class="active">
+						<?php echo anchor("home/index", "Home"); ?>
+					</li>
+					<li>
+						<?php echo anchor("link_stat/all", "Aggregate Statistics"); ?>
+					</li>
+				</ul>
 			<div class="container">
 			</div>
 			</div>
@@ -30,7 +38,7 @@
 						<tr>
 							<td><?php echo $url->keyword; ?></td>
 							<td><?php echo $url->url; ?></td>
-							<td><?php echo anchor("link_stat/link_stats/" . xss_clean($url->keyword), "View Stats"); ?></td>
+							<td><?php echo anchor("link_stat/link_stats/" . xss_clean($url->keyword), "View Stats", array("class" => "btn")); ?></td>
 						</tr>
 					<?php endforeach;?>
 				</tbody>
