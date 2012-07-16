@@ -23,7 +23,13 @@
 				</div>
 			</div>
 
-			
+			<div class="well form-inline">
+				<label class="checkbox">
+					<input id="all" type="checkbox" checked="checked"> Show all
+				</label>
+				<input type="text" class="input-medium search-query">
+				<button type="submit" class="btn">Search</button>
+			</div>
 		</div>
 	</body>
 	<script>
