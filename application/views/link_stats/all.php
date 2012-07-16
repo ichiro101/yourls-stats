@@ -16,7 +16,7 @@
 					<li>
 						<?php echo anchor("home/index", "Home"); ?>
 					</li>
-					<li>
+					<li class="active">
 						<?php echo anchor("link_stat/all", "Aggregate Statistics"); ?>
 					</li>
 				</ul>
