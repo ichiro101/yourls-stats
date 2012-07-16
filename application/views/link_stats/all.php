@@ -10,22 +10,26 @@
 				// Navigation bar stuff...
 			?>
 			<div class="navbar">
-			<div class="navbar-inner">
-				<a class="brand" href="<?php echo site_url('/'); ?>">Yourls Stats</a>
-				<ul class="nav">
-					<li>
-						<?php echo anchor("home/index", "Home"); ?>
-					</li>
-					<li class="active">
-						<?php echo anchor("link_stat/all", "Aggregate Statistics"); ?>
-					</li>
-				</ul>
-			<div class="container">
-			</div>
-			</div>
+				<div class="navbar-inner">
+					<a class="brand" href="<?php echo site_url('/'); ?>">Yourls Stats</a>
+					<ul class="nav">
+						<li>
+							<?php echo anchor("home/index", "Home"); ?>
+						</li>
+						<li class="active">
+							<?php echo anchor("link_stat/all", "Aggregate Statistics"); ?>
+						</li>
+					</ul>
+				</div>
 			</div>
 
+			
 		</div>
 	</body>
+	<script>
+		$(document).ready(function() {
+
+		});
+	</script>
 </html>
 

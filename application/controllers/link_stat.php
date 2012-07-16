@@ -22,4 +22,7 @@ class Link_Stat extends CI_Controller {
 
 		$this->load->view("link_stats/link_stats", $data);
 	}
+
+	public function get_stats() {
+	}
 }
