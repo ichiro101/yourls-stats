@@ -1,6 +1,3 @@
-<?php 
-	$this->load->helper('url'); 
-?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -20,8 +17,24 @@
 			</div>
 			</div>
 
-			<?php
-			?>
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Target url</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach($urls as $url): ?>
+						<tr>
+							<td><?php echo $url->keyword; ?></td>
+							<td><?php echo $url->url; ?></td>
+							<td><?php echo anchor("link_stat/link_stats/" . xss_clean($url->keyword), "View Stats"); ?></td>
+						</tr>
+					<?php endforeach;?>
+				</tbody>
+			</table>
 		</div>
 	</body>
 </html>
