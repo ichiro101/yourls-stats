@@ -23,6 +23,10 @@ class Link_Stat extends CI_Controller {
 		$this->load->view("link_stats/link_stats", $data);
 	}
 
-	public function get_stats() {
+	// Parameters from $_POST we can have
+	//
+	// showAll
+	public function get_all_logs() {
+		print_r($_POST);
 	}
 }

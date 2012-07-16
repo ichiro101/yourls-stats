@@ -52,6 +52,22 @@
 					$("#before-date").datepicker("option", "maxDate", selectDate);
 				}
 			});
+
+			var url = "<?php echo site_url("link_stat/get_all_logs"); ?>";
+
+			var request = $.ajax({
+				url: url,
+				data: { showAll: true },
+				type: "post"
+			});
+
+			request.done(function(msg) {
+				console.log(msg);
+			});
+
+			request.fail(function(jqXHR, textStatus) {
+				console.log( "Request failed: " + textStatus );
+			});
 		});
 	</script>
 </html>
