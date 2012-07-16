@@ -9,6 +9,9 @@
 	</head>
 	<body>
 		<div class="container-fluid">
+			<?php
+				// Navigation bar stuff...
+			?>
 			<div class="navbar">
 			<div class="navbar-inner">
 				<a class="brand" href="<?php echo site_url('/'); ?>">Yourls Stats</a>
@@ -16,6 +19,9 @@
 			</div>
 			</div>
 			</div>
+
+			<?php
+			?>
 		</div>
 	</body>
 </html>
