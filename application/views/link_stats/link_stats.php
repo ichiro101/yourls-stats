@@ -47,6 +47,7 @@
 				<div id="country-chart" style="width: 1200px; height: 500px;"></div>
 				<div id="country-map" style="width: 1200px; height: 500px;"></div>
 				<div id="traffic-source" style="width: 1200px; height: 500px;"></div>
+				<div id="browser-source" style="width: 1200px; height: 500px;"></div>
 			<?php endif; ?>
 
 		</div>

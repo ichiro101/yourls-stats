@@ -5,6 +5,7 @@
 		<script type="text/javascript" src="<?php echo base_url("js/jquery-ui.js"); ?>"></script>
 		<script type="text/javascript" src="<?php echo base_url("js/moment.js"); ?>"></script>
 		<script type="text/javascript" src="<?php echo base_url("js/bootstrap.js"); ?>"></script>
+		<script type="text/javascript" src="<?php echo base_url("js/ua-parser.js"); ?>"></script>
 		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 		<script type="text/javascript" src="<?php echo base_url("js/application.js"); ?>"></script>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url("css/bootstrap.css"); ?>" />
@@ -47,6 +48,7 @@
 				<div id="country-chart" style="width: 1200px; height: 500px;"></div>
 				<div id="country-map" style="width: 1200px; height: 500px;"></div>
 				<div id="traffic-source" style="width: 1200px; height: 500px;"></div>
+				<div id="browser-source" style="width: 1200px; height: 500px;"></div>
 			<?php endif; ?>
 
 		</div>

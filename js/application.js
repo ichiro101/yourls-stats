@@ -264,7 +264,7 @@ var parseTrafficSource = function(data) {
 	return trafficSource;
 }
 
-var drawCountryMap = function(data, startDate, endDate, redraw) {
+var drawTrafficSource = function(data, startDate, endDate, redraw) {
 	var drawChart = function() {
 		var table = [
 			["Source", "Hit Count"]
@@ -291,6 +291,52 @@ var drawCountryMap = function(data, startDate, endDate, redraw) {
 	}
 }
 
+var parseBrowserData = function(data) {
+	browserSource = {};
+
+	for(var i = 0; i < data.length; i++) {
+		var userAgent = data[i]["user_agent"];
+		var p = new UAParser(userAgent);
+
+		var name = p.result.browser["name"];
+
+		if(name in browserSource) {
+			browserSource[name]++;
+		} else {
+			browserSource[name] = 1;
+		}
+	}
+	
+	return browserSource;
+}
+
+var drawBrowserSource = function(data, startDate, endDate, redraw) {
+	var drawChart = function() {
+		var table = [
+			["Browser", "Hit Count"]
+		];
+
+		browserSource = parseBrowserData(data);
+
+		for(var key in browserSource) {
+			table.push([key, browserSource[key]]);
+		}
+
+		var chartData = google.visualization.arrayToDataTable(table);
+
+		var options = {
+			title: 'Browser Usage'
+		};
+
+		var chart = new google.visualization.PieChart(document.getElementById('browser-source'));
+		chart.draw(chartData, options);
+	};
+	google.setOnLoadCallback(drawChart);
+	if(redraw) {
+		drawChart();
+	}
+}
+
 // The main function that produces data charts
 var analyzeData = function(data, redraw) {
 	redraw = typeof redraw !== 'undefined' ? redraw : false;
@@ -308,4 +354,5 @@ var analyzeData = function(data, redraw) {
 	drawCountryChart(data, startDate, endDate, redraw);
 	drawCountryMap(data, startDate, endDate, redraw);
 	drawTrafficSource(data, startDate, endDate, redraw);
+	drawBrowserSource(data, startDate, endDate, redraw);
 };
