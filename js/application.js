@@ -186,7 +186,7 @@ var parseCountryData = function(data) {
 }
 
 var drawCountryChart = function(data, startDate, endDate, redraw) {
-	drawChart = function() {
+	var drawChart = function() {
 		var table = [
 			["Country", "Hit Count"]
 		];
@@ -205,7 +205,34 @@ var drawCountryChart = function(data, startDate, endDate, redraw) {
 
 		var chart = new google.visualization.PieChart(document.getElementById('country-chart'));
 		chart.draw(chartData, options);
+	};
+	google.setOnLoadCallback(drawChart);
+	if(redraw) {
+		drawChart();
 	}
+}
+
+var drawCountryMap = function(data, startDate, endDate, redraw) {
+	var drawChart = function() {
+		var table = [
+			["Country", "Hit Count"]
+		];
+
+		countryData = parseCountryData(data);
+
+		for(var key in countryData) {
+			table.push([key, countryData[key]]);
+		}
+
+		var chartData = google.visualization.arrayToDataTable(table);
+
+		var options = {
+			title: 'Hits by Country'
+		};
+
+		var chart = new google.visualization.GeoChart(document.getElementById('country-map'));
+		chart.draw(chartData, options);
+	};
 	google.setOnLoadCallback(drawChart);
 	if(redraw) {
 		drawChart();
@@ -227,4 +254,5 @@ var analyzeData = function(data, redraw) {
 	drawDailyChart(data, startDate, endDate, redraw);
 	drawHourlyChart(data, startDate, endDate, redraw);
 	drawCountryChart(data, startDate, endDate, redraw);
+	drawCountryMap(data, startDate, endDate, redraw);
 };

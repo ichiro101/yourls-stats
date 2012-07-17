@@ -4,6 +4,7 @@
 		<script type="text/javascript" src="<?php echo base_url("js/jquery.js"); ?>"></script>
 		<script type="text/javascript" src="<?php echo base_url("js/jquery-ui.js"); ?>"></script>
 		<script type="text/javascript" src="<?php echo base_url("js/moment.js"); ?>"></script>
+		<script type="text/javascript" src="<?php echo base_url("js/bootstrap.js"); ?>"></script>
 		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 		<script type="text/javascript" src="<?php echo base_url("js/application.js"); ?>"></script>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url("css/bootstrap.css"); ?>" />
@@ -36,15 +37,21 @@
 				</div>
 			</div>
 
-			<div id="day-chart" style="width: 1200px; height: 500px;"></div>
-			<div id="hour-chart" style="width: 1200px; height: 500px;"></div>
-			<div id="country-chart" style="width: 1200px; height: 500px;"></div>
-			<div id="country-map" style="width: 1200px; height: 500px;"></div>
+			<?php if(empty($data)): ?>
+			<div class="alert alert-error">
+				<p>There are currently no data avaliable to show</p>
+			</div>
+			<?php else: ?>
+				<div id="day-chart" style="width: 1200px; height: 500px;"></div>
+				<div id="hour-chart" style="width: 1200px; height: 500px;"></div>
+				<div id="country-chart" style="width: 1200px; height: 500px;"></div>
+				<div id="country-map" style="width: 1200px; height: 500px;"></div>
+			<?php endif; ?>
 
 		</div>
 	</body>
 	<script>
-		google.load("visualization", "1", {packages:["corechart"]});
+		google.load("visualization", "1", {packages:["corechart", "geochart"]});
 		$(document).ready(function() {
 			var today = new Date();
 
