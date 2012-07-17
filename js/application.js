@@ -279,7 +279,7 @@ var drawTrafficSource = function(data, startDate, endDate, redraw) {
 		var chartData = google.visualization.arrayToDataTable(table);
 
 		var options = {
-			title: 'Hits by Country'
+			title: 'Source of Traffic'
 		};
 
 		var chart = new google.visualization.PieChart(document.getElementById('traffic-source'));
