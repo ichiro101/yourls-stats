@@ -29,9 +29,6 @@
 			</div>
 
 			<div class="well form-inline">
-				<label class="checkbox">
-					<input id="all" type="checkbox" checked="checked"> Show all
-				</label>
 				<span id="datePickers">
 					<input type="text" id="before-date" class="input-medium">
 					<input type="text" id="after-date" class="input-medium">

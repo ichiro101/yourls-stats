@@ -1,14 +1,17 @@
+var filterIsOn = function() {
+	return $("#before-date").val()&& $("#after-date").val();
+}
+
 var enableFilterDate = function() {
 	// if the date fields are filled
 	// we need to enable the button
-
-	if($("#before-date").val()&&
-			$("#after-date").val()) {
-				$("button#filter-button").removeAttr("disabled");
+	if(filterIsOn()) {
+		$("button#filter-button").removeAttr("disabled");
 	} else {
 		$("button#filter-button").attr("disabled", "disabled");
 	}
 }
+
 
 // parse date from mysql format
 //
@@ -27,7 +30,7 @@ var parseMysqlDate = function(dateString) {
 var getStartDate = function(data) {
 	var startDate = new Date();
 
-	if($("input#all").attr("checked")) {
+	if(filterIsOn()) {
 		for(var i = 0; i < data.length; i++) {
 			dateObject = parseMysqlDate(data[i]["click_time"]);
 
@@ -45,7 +48,7 @@ var getStartDate = function(data) {
 var getEndDate = function(data) {
 	var endDate = new Date();
 
-	if($("input#all").attr("checked")) {
+	if(filterIsOn()) {
 		return moment(endDate);
 	} else {
 		return moment($("#after-date").val());
@@ -179,7 +182,7 @@ var analyzeData = function(data, redraw) {
 	var startDate = getStartDate(data);
 	var endDate = getEndDate(data);
 
-	if(!$("input#all").attr("checked")) {
+	if(!filterIsOn()) {
 		data = filterDate(data, startDate, endDate);
 	}
 
