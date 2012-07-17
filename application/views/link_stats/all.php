@@ -3,6 +3,7 @@
 	<head>
 		<script type="text/javascript" src="<?php echo base_url("js/jquery.js"); ?>"></script>
 		<script type="text/javascript" src="<?php echo base_url("js/jquery-ui.js"); ?>"></script>
+		<script type="text/javascript" src="<?php echo base_url("js/application.js"); ?>"></script>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url("css/bootstrap.css"); ?>" />
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url("css/black-tie/jquery-ui.custom.css"); ?>" />
 	</head>
@@ -33,6 +34,7 @@
 				<input type="text" id="after-date" class="input-medium">
 				<button type="submit" class="btn">Select Date</button>
 			</div>
+
 		</div>
 	</body>
 	<script>
@@ -53,21 +55,9 @@
 				}
 			});
 
-			var url = "<?php echo site_url("link_stat/get_all_logs"); ?>";
+			var data = <?php echo json_encode($data); ?>;
 
-			var request = $.ajax({
-				url: url,
-				data: { showAll: true },
-				type: "post"
-			});
-
-			request.done(function(msg) {
-				console.log(msg);
-			});
-
-			request.fail(function(jqXHR, textStatus) {
-				console.log( "Request failed: " + textStatus );
-			});
+			analyzeData(data);
 		});
 	</script>
 </html>

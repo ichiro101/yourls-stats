@@ -8,6 +8,9 @@ class Link_Stat extends CI_Controller {
 		$this->load->model('Yourls_log');
 
 		$data = array();
+		$Yourls_log = $this->Yourls_log->all();
+
+		$data["data"] = $Yourls_log;
 
 		$this->load->view("link_stats/all", $data);
 	}
@@ -21,12 +24,5 @@ class Link_Stat extends CI_Controller {
 		$data = array();
 
 		$this->load->view("link_stats/link_stats", $data);
-	}
-
-	// Parameters from $_POST we can have
-	//
-	// showAll
-	public function get_all_logs() {
-		print_r($_POST);
 	}
 }
