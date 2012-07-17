@@ -243,6 +243,54 @@ var drawCountryMap = function(data, startDate, endDate, redraw) {
 	}
 }
 
+var parseTrafficSource = function(data) {
+	trafficSource = {
+		direct: 0
+	};
+
+	for(var i = 0; i < data.length; i++) {
+		var source = data[i]["referrer"];
+
+		if(!source) {
+			continue;
+		}
+		if(source in trafficSource) {
+			trafficSource[source]++;
+		} else {
+			trafficSource[source] = 1;
+		}
+	}
+
+	return trafficSource;
+}
+
+var drawCountryMap = function(data, startDate, endDate, redraw) {
+	var drawChart = function() {
+		var table = [
+			["Source", "Hit Count"]
+		];
+
+		trafficSource = parseTrafficSource(data);
+
+		for(var key in trafficSource) {
+			table.push([key, trafficSource[key]]);
+		}
+
+		var chartData = google.visualization.arrayToDataTable(table);
+
+		var options = {
+			title: 'Hits by Country'
+		};
+
+		var chart = new google.visualization.PieChart(document.getElementById('traffic-source'));
+		chart.draw(chartData, options);
+	};
+	google.setOnLoadCallback(drawChart);
+	if(redraw) {
+		drawChart();
+	}
+}
+
 // The main function that produces data charts
 var analyzeData = function(data, redraw) {
 	redraw = typeof redraw !== 'undefined' ? redraw : false;
@@ -259,4 +307,5 @@ var analyzeData = function(data, redraw) {
 	drawHourlyChart(data, startDate, endDate, redraw);
 	drawCountryChart(data, startDate, endDate, redraw);
 	drawCountryMap(data, startDate, endDate, redraw);
+	drawTrafficSource(data, startDate, endDate, redraw);
 };
