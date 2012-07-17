@@ -44,6 +44,9 @@ $route['404_override'] = '';
 $route['all'] = 'link_stats/all';
 $route['link_stats/(:any)'] = 'link_stats/link_stats';
 
+// this is an ajax call for all the logs
+$route['get_all_logs'] = 'link_stats/get_all_logs';
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
