@@ -1,5 +1,9 @@
 var filterIsOn = function() {
-	return $("#before-date").val()&& $("#after-date").val();
+	if($("#before-date").val()&& $("#after-date").val()) {
+		return true;
+	} else {
+		return false;
+	}
 }
 
 var enableFilterDate = function() {
@@ -30,7 +34,7 @@ var parseMysqlDate = function(dateString) {
 var getStartDate = function(data) {
 	var startDate = new Date();
 
-	if(filterIsOn()) {
+	if(!filterIsOn()) {
 		for(var i = 0; i < data.length; i++) {
 			dateObject = parseMysqlDate(data[i]["click_time"]);
 
@@ -48,7 +52,7 @@ var getStartDate = function(data) {
 var getEndDate = function(data) {
 	var endDate = new Date();
 
-	if(filterIsOn()) {
+	if(!filterIsOn()) {
 		return moment(endDate);
 	} else {
 		return moment($("#after-date").val());
@@ -106,7 +110,6 @@ var drawDailyChart = function(data, startDate, endDate, redraw) {
 			}
 		}
 		table.push([current.format("MMMM Do YYYY"), count]);
-
 
 		var chartData = google.visualization.arrayToDataTable(table);
 
@@ -182,7 +185,7 @@ var analyzeData = function(data, redraw) {
 	var startDate = getStartDate(data);
 	var endDate = getEndDate(data);
 
-	if(!filterIsOn()) {
+	if(filterIsOn()) {
 		data = filterDate(data, startDate, endDate);
 	}
 
