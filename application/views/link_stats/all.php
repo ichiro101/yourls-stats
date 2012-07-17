@@ -38,6 +38,8 @@
 
 			<div id="day-chart" style="width: 1200px; height: 500px;"></div>
 			<div id="hour-chart" style="width: 1200px; height: 500px;"></div>
+			<div id="country-chart" style="width: 1200px; height: 500px;"></div>
+			<div id="country-map" style="width: 1200px; height: 500px;"></div>
 
 		</div>
 	</body>

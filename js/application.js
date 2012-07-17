@@ -75,8 +75,6 @@ var filterDate = function(data, startDate, endDate) {
 				}
 	}
 
-	console.log(newData);
-
 	return newData;
 };
 
@@ -173,8 +171,45 @@ var drawHourlyChart = function(data, startDate, endDate, redraw) {
 	}
 }
 
-var drawCountryChart = function(data) {
+var parseCountryData = function(data) {
+	var countryData = {};
+	for(var i = 0; i < data.length; i++) {
+		var country = data[i]["country_code"];
+		if(country in countryData) {
+			countryData[country]++;
+		} else {
+			countryData[country] = 1;
+		}
+	}
 
+	return countryData;
+}
+
+var drawCountryChart = function(data, startDate, endDate, redraw) {
+	drawChart = function() {
+		var table = [
+			["Country", "Hit Count"]
+		];
+
+		countryData = parseCountryData(data);
+
+		for(var key in countryData) {
+			table.push([key, countryData[key]]);
+		}
+
+		var chartData = google.visualization.arrayToDataTable(table);
+
+		var options = {
+			title: 'Hits by Country'
+		};
+
+		var chart = new google.visualization.PieChart(document.getElementById('country-chart'));
+		chart.draw(chartData, options);
+	}
+	google.setOnLoadCallback(drawChart);
+	if(redraw) {
+		drawChart();
+	}
 }
 
 // The main function that produces data charts
@@ -191,4 +226,5 @@ var analyzeData = function(data, redraw) {
 
 	drawDailyChart(data, startDate, endDate, redraw);
 	drawHourlyChart(data, startDate, endDate, redraw);
+	drawCountryChart(data, startDate, endDate, redraw);
 };
