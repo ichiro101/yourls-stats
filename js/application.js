@@ -2,9 +2,11 @@ var enableFilterDate = function() {
 	// if the date fields are filled
 	// we need to enable the button
 
-	if($("before-date").val() != null &&
-			$("after-date").val() != null) {
-
+	if($("#before-date").val()&&
+			$("#after-date").val()) {
+				$("button#filter-button").removeAttr("disabled");
+	} else {
+		$("button#filter-button").attr("disabled", "disabled");
 	}
 }
 
@@ -140,6 +142,10 @@ var drawHourlyChart = function(data, startDate, endDate) {
 		var chart = new google.visualization.LineChart(document.getElementById('hour-chart'));
 		chart.draw(chartData, options);
 	}
+}
+
+var drawCountryChart = function(data) {
+
 }
 
 // The main function that produces data charts

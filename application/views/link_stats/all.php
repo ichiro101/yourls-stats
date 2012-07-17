@@ -32,9 +32,11 @@
 				<label class="checkbox">
 					<input id="all" type="checkbox" checked="checked"> Show all
 				</label>
-				<input type="text" id="before-date" class="input-medium">
-				<input type="text" id="after-date" class="input-medium">
-				<button disabled="disabled" type="submit" class="btn">Filter Date</button>
+				<span id="datePickers">
+					<input type="text" id="before-date" class="input-medium">
+					<input type="text" id="after-date" class="input-medium">
+					<button id="filter-button" disabled="disabled" type="submit" class="btn">Filter Date</button>
+				</div>
 			</div>
 
 			<div id="day-chart" style="width: 1200px; height: 500px;"></div>
