@@ -35,6 +35,8 @@ var getStartDate = function(data) {
 				startDate = dateObject;
 			}
 		}
+	} else {
+		return moment($("#before-date").val());
 	}
 
 	return moment(startDate);
@@ -45,6 +47,8 @@ var getEndDate = function(data) {
 
 	if($("input#all").attr("checked")) {
 		return moment(endDate);
+	} else {
+		return moment($("#after-date").val());
 	}
 };
 
@@ -52,13 +56,25 @@ var getEndDate = function(data) {
 // output: only the data that is in range will
 // be returned, data will be returned in the same
 // format
-var filterDate = function(data) {
+var filterDate = function(data, startDate, endDate) {
+	newData = [];
 
+	for(var i = 0; i < data.length; i++) {
+		current = moment(parseMysqlDate(data[i]["click_time"]));
+
+		if(startDate <= current &&
+				endDate >= current) {
+					newData.push(data[i]);
+				}
+	}
+
+	console.log(newData);
+
+	return newData;
 };
 
-var drawDailyChart = function(data, startDate, endDate) {
-	google.setOnLoadCallback(drawChart);
-	function drawChart() {
+var drawDailyChart = function(data, startDate, endDate, redraw) {
+	gDrawDailyChart = function() {
 		var table = [
 			["Date", "Hit Count"]
 		];
@@ -98,11 +114,14 @@ var drawDailyChart = function(data, startDate, endDate) {
 		var chart = new google.visualization.LineChart(document.getElementById('day-chart'));
 		chart.draw(chartData, options);
 	}
+	google.setOnLoadCallback(gDrawDailyChart);
+	if(redraw) {
+		gDrawDailyChart();
+	}
 }
 
-var drawHourlyChart = function(data, startDate, endDate) {
-	google.setOnLoadCallback(drawChart);
-	function drawChart() {
+var drawHourlyChart = function(data, startDate, endDate, redraw) {
+	gDrawHourlyChart = function() {
 		var table = [
 			["Date", "Hit Count"]
 		];
@@ -117,7 +136,7 @@ var drawHourlyChart = function(data, startDate, endDate) {
 					count++;
 				}
 			}
-			table.push([current.format("MMMM Do YYYY HH"), count]);
+			table.push([current.format("M/D/YYYY HH"), count]);
 
 			current = current.add("hours", 1);
 		}
@@ -142,6 +161,10 @@ var drawHourlyChart = function(data, startDate, endDate) {
 		var chart = new google.visualization.LineChart(document.getElementById('hour-chart'));
 		chart.draw(chartData, options);
 	}
+	google.setOnLoadCallback(gDrawHourlyChart);
+	if(redraw) {
+		gDrawHourlyChart();
+	}
 }
 
 var drawCountryChart = function(data) {
@@ -149,14 +172,17 @@ var drawCountryChart = function(data) {
 }
 
 // The main function that produces data charts
-var analyzeData = function(data) {
-	if(!$("input#all").attr("checked")) {
-		data = filterDate(data);
-	}
+var analyzeData = function(data, redraw) {
+	redraw = typeof redraw !== 'undefined' ? redraw : false;
+
 
 	var startDate = getStartDate(data);
 	var endDate = getEndDate(data);
 
-	drawDailyChart(data, startDate, endDate);
-	drawHourlyChart(data, startDate, endDate);
+	if(!$("input#all").attr("checked")) {
+		data = filterDate(data, startDate, endDate);
+	}
+
+	drawDailyChart(data, startDate, endDate, redraw);
+	drawHourlyChart(data, startDate, endDate, redraw);
 };

@@ -65,10 +65,13 @@
 				}
 			});
 
-
 			var data = <?php echo json_encode($data); ?>;
 
-			analyzeData(data);
+			analyzeData(data, false);
+
+			$("#filter-button").click(function() {
+				analyzeData(data, true);
+			});
 		});
 	</script>
 </html>
