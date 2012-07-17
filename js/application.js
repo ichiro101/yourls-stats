@@ -175,6 +175,10 @@ var parseCountryData = function(data) {
 	var countryData = {};
 	for(var i = 0; i < data.length; i++) {
 		var country = data[i]["country_code"];
+		if(!country) {
+			continue;
+		}
+
 		if(country in countryData) {
 			countryData[country]++;
 		} else {
