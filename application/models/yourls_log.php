@@ -7,4 +7,9 @@ class Yourls_Log extends CI_Model {
 		return $query->result();
 	}
 
+	public function url($url) {
+		$query = $this->db->get_where("yourls_log", array("shorturl" => $url));
+		return $query->result();
+	}
+
 }

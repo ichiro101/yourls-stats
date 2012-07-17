@@ -22,6 +22,9 @@ class Link_Stat extends CI_Controller {
 		$this->load->model('Yourls_log');
 
 		$data = array();
+		$Yourls_log = $this->Yourls_log->url($url);
+
+		$data["data"] = $Yourls_log;
 
 		$this->load->view("link_stats/link_stats", $data);
 	}

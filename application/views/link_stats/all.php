@@ -50,6 +50,7 @@
 
 		</div>
 	</body>
+	<?php if(!empty($data)): ?>
 	<script>
 		google.load("visualization", "1", {packages:["corechart", "geochart"]});
 		$(document).ready(function() {
@@ -80,5 +81,6 @@
 			});
 		});
 	</script>
+	<?php endif; ?>
 </html>
 
